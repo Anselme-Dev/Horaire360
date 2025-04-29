@@ -58,6 +58,15 @@ class EmployeController extends Controller
         $postes = Poste::all();
         
         return view('employes.index', compact('employes', 'postes'));
+        // Pour l'admin : afficher tous les employés
+    if (auth()->user()->hasRole('admin')) {
+        $employes = Employe::with('user')->get();
+    } else {
+        // Pour les employés : afficher uniquement leur propre profil
+        $employes = Employe::where('user_id', auth()->id())->get();
+    }
+    
+    return view('employes.index', compact('employes'));
     }
 
     /**

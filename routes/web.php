@@ -48,7 +48,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/plannings/calendrier', [PlanningController::class, 'calendrier'])->name('plannings.calendrier');
     
     // Routes pour les présences (itération 3)
-    Route::resource('presences', PresenceController::class);
     Route::resource('presences', PresenceController::class)->middleware(['auth']);
     Route::post('/presences/import', [PresenceController::class, 'import'])->name('presences.import');
     Route::get('/presences/export/template', [PresenceController::class, 'exportTemplate'])->name('presences.export-template');
@@ -59,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/presences/export/excel', [PresenceController::class, 'exportExcel'])->name('presences.export-excel');
     Route::get('/presences/export/pdf', [PresenceController::class, 'exportPdf'])->name('presences.export-pdf');
     Route::get('/presences/export/template', [PresenceController::class, 'exportTemplate'])->name('presences.export-template');
+    Route::post('presences/import', [PresenceController::class, 'import'])->name('presences.import');
     
     
     // Routes pour les rapports (itération 4)
